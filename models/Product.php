@@ -15,4 +15,9 @@ class Product extends Model {
 
     protected $tableName = 'product';
 
+    public function getTableName(){
+
+        return $this->tableName;
+
+    }
 }

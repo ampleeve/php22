@@ -6,7 +6,14 @@
  * Date: 19.02.17
  * Time: 12:59
  */
-class Model{
+interface IModel{
+
+    public static function getBuId($id);
+    public static function getAll();
+
+}
+
+abstract class Model{
 
     protected $db;
     protected $dbConfig =[
@@ -19,7 +26,7 @@ class Model{
         'database' => 'shop',
 
     ];
-    protected $tableName = null;
+    protected static $tableName = null;
 
     public function __construct(){
 
@@ -35,9 +42,12 @@ class Model{
 
     }
 
+    abstract public static function getTableName();
+
     public static function getById($id){
 
-        $sql = "SELECT * FROM {$this->tableName} WHERE id={$id}";
+        $table = static::getTableName();
+        $sql = "SELECT * FROM {$table} WHERE id={$id}";
         $result = $this->db->query($sql);
         return new Product($result);
 
@@ -45,7 +55,7 @@ class Model{
 
     public static function getAll(){
 
-        $sql = "SELECT * FROM {$this->tableName}";
+        $sql = "SELECT * FROM {static::tableName}";
         $result = $this->db->query($sql);
         return new Product($result);
 
