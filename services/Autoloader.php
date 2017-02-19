@@ -8,5 +8,26 @@
  */
 class Autoloader
 {
+    public $paths = [
+        'models/',
+        'services/'
+    ];
+
+
+    public function loadClass($className){
+
+        foreach ($this->paths as $dir){
+
+            $fileName = "../{$dir}{$className}.php";
+
+            if(file_exists($fileName)){
+
+                require_once($fileName);
+                break;
+
+            }
+        }
+
+    }
 
 }

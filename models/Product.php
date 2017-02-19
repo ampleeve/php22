@@ -13,6 +13,12 @@ class Product
     public $description;
     public $price;
 
+    protected $db;
 
+    public function __construct(){
+
+        
+
+    }
 
 }
