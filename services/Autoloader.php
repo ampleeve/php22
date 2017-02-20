@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: evgenijampleev
@@ -28,6 +27,12 @@ class Autoloader
             }
         }
 
+    }
+
+    public static function loadPackagesAndLog($className)
+    {
+        self::loadPackages($className);
+        printf("Class %s was loaded from %sn", $className, self::$_lastLoadedFilename);
     }
 
 }
