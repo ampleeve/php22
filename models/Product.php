@@ -1,11 +1,4 @@
 <?php
-
-/**
- * Created by PhpStorm.
- * User: evgenijampleev
- * Date: 19.02.17
- * Time: 9:25
- */
 class Product extends Model {
 
     public $id;
@@ -15,7 +8,7 @@ class Product extends Model {
 
     protected $tableName = 'product';
 
-    public function getTableName(){
+    public static function getTableName(){
 
         return $this->tableName;
 
