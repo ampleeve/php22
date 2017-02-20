@@ -10,7 +10,7 @@ class Product extends Model {
 
     public static function getTableName(){
 
-        return $this->tableName;
+        return static::tableName;
 
     }
 }

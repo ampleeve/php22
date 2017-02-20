@@ -1,5 +1,7 @@
 <?php
 
+namespace app\services;
+
 class Db{
 
     protected static $conn;

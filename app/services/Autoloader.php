@@ -1,4 +1,6 @@
 <?php
+
+namespace app\services;
 /**
  * Created by PhpStorm.
  * User: evgenijampleev
