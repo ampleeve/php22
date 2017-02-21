@@ -1,5 +1,5 @@
 <?php
-
+namespace app\traits;
 trait TSingltone
 {
     protected static $instance = null;

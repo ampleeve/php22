@@ -4,7 +4,7 @@ spl_autoload_register([new Autoloader(),'loadClass']);
 
 header("Content-type: text/html;charset=utf-8");
 //$product = new Product();
-$order = new Order();
+$order = new app\models\Order();
 echo '<pre>';
 echo "Получить конкретный заказ: <br/>";
 var_dump($order->getAllOrderById(1));
