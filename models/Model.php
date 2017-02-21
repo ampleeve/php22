@@ -1,23 +1,22 @@
 <?php
-abstract class Model {
-
-    protected  static $db;
+abstract class Model
+{
+    protected static $db;
 
     abstract public static function getTableName();
 
     public static function getById($id){
 
         $table = static::getTableName();
-        $sql = "SELECT * FROM {$table} WHERE id={$id}";
-        $res = DB::getInstance()->query($sql);
-        return new Product($res);
-
+        $sql = "SELECT * FROM {$table} WHERE id = :id";
+        return Db::getInstance()->fetchOne($sql, [":id" => $id]);
     }
 
     public static function getAll(){
-
-        $sql = "SELECT * FROM {static::tableName}";
-        return DB::getInstance()->getAll();
-
+        $table = static::getTableName();
+        $sql = "SELECT * FROM {$table}";
+        return Db::getInstance()->fetchAll($sql);
     }
+
 }
+?>

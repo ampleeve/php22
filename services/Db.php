@@ -1,10 +1,10 @@
 <?php
 
-class Db{
+class Db
+{
+    use TSingltone;
 
-    protected static $conn;
-    protected static $instance = null;
-
+    protected $conn;
     protected $dbConfig = [
         'driver' => 'mysql',
         'host' => 'localhost',
@@ -13,24 +13,9 @@ class Db{
         'database' => 'shop'
     ];
 
-    protected function __construct(){}
-    protected function __clone(){}
-    protected function __wakeup(){}
 
-    public static function getInstance(){
-
-        if(is_null(static::$instance)){
-
-            static::$instance = new static();
-
-        }
-
-        return static::$instance;
-
-    }
-
-    public function getConnection(){
-
+    public function getConnection()
+    {
         if (is_null($this->conn)) {
             $this->conn = new PDO(
                 $this->prepareDnsString(),
@@ -51,6 +36,7 @@ class Db{
      */
     public function query($sql, $params = [])
     {
+        //"SELECT * FROM product WHERE id = :id";
         $smtp = $this->getConnection()->prepare($sql);
         $smtp->execute($params);
         return $smtp;
@@ -64,6 +50,7 @@ class Db{
 
     public function fetchOne($sql, $params = [])
     {
+        //var_dump($this);die();
         return $this->fetchAll($sql, $params)[0];
     }
 
