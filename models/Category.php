@@ -1,10 +1,9 @@
 <?php
-class Category extends Model{
-
-    protected $tableName = 'category';
-
+class Categorie extends Model
+{
     public function getTableName()
     {
-       return $this->tableName;
+        return 'categorie';
     }
+
 }
