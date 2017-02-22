@@ -25,6 +25,7 @@ class ProductController{
     public function actionProduct(){
 
         $id = $_GET['id'];
+        $this->render('');
         $model = Product::getById($id);
 
 
@@ -33,6 +34,12 @@ class ProductController{
     public function actionIndex(){
 
         echo "Index";
+
+    }
+
+    protected function render($template, $params = []){
+
+
 
     }
 

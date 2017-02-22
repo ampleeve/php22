@@ -4,11 +4,12 @@ class Product extends Model
 {
     public $id;
     public $name;
-    public $brandId;
-    public $typeId;
-    public $categoryId;
     public $price;
+    public $description;
     public $vendorCode;
+    public $typeID;
+    public $brandID;
+    public $categoryID;
 
     protected $tableName = 'product';
 
