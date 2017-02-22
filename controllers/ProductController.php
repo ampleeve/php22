@@ -7,7 +7,7 @@
  */
 
 namespace app\controllers;
-
+use app\models\Product;
 
 class ProductController{
 
@@ -25,6 +25,8 @@ class ProductController{
     public function actionProduct(){
 
         $id = $_GET['id'];
+        $model = Product::getById($id);
+
 
     }
 

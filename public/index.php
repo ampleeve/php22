@@ -1,4 +1,5 @@
 <?php
+//error_reporting( E_ERROR );
 include_once "../services/Autoloader.php";
 spl_autoload_register([new Autoloader(),'loadClass']);
 header("Content-type: text/html;charset=utf-8");
