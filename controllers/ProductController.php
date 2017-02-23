@@ -25,9 +25,10 @@ class ProductController{
     public function actionProduct(){
 
         $id = $_GET['id'];
-        $this->render('');
-        $model = Product::getById($id);
-
+        $this->render(
+            'Product',
+            ['model' => Product::getById($id)]
+        );
 
     }
 
@@ -39,7 +40,11 @@ class ProductController{
 
     protected function render($template, $params = []){
 
-
+        $templatePath =
+            $_SERVER['DOCUMENT_ROOT'] .
+            "/../views/{$template}.php";
+        extract($params);
+        include $templatePath;
 
     }
 

@@ -4,9 +4,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> <?php $model->name ?></title>
+    <title><?= $model->name ?></title>
 </head>
 <body>
-
+<?= $model->name ?>
 </body>
 </html>
