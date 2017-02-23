@@ -13,6 +13,8 @@ class ProductController{
 
     protected $action;
     protected $defaultAction = "index";
+    protected $layout = 'main';
+    protected $useLayout = 'true';
 
     public function run($action = null){
 
@@ -44,7 +46,15 @@ class ProductController{
             $_SERVER['DOCUMENT_ROOT'] .
             "/../views/{$template}.php";
         extract($params);
+        ob_start();
         include $templatePath;
+        ob_get_clean();
+
+    }
+
+    protected function renderTemplate(){
+
+
 
     }
 
