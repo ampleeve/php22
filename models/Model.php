@@ -1,4 +1,6 @@
 <?php
+namespace app\models;
+use app\services\Db;
 abstract class Model
 {
     protected static $db;
@@ -9,7 +11,7 @@ abstract class Model
 
         $table = static::getTableName();
         $sql = "SELECT * FROM {$table} WHERE id = :id";
-        return Db::getInstance()->fetchOne($sql, [":id" => $id]);
+        return Db::getInstance()->fetchObject($sql, [":id" => $id], get_called_class());
     }
 
     public static function getAll(){

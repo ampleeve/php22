@@ -1,5 +1,7 @@
 <?php
-
+namespace app\services;
+use app\traits\TSingltone;
+use \PDO;
 class Db
 {
     use TSingltone;
@@ -36,7 +38,6 @@ class Db
      */
     public function query($sql, $params = [])
     {
-        //"SELECT * FROM product WHERE id = :id";
         $smtp = $this->getConnection()->prepare($sql);
         $smtp->execute($params);
         return $smtp;
@@ -48,9 +49,8 @@ class Db
         return $smtp->fetchAll();
     }
 
-    public function fetchOne($sql, $params = [])
-    {
-        //var_dump($this);die();
+    public function fetchOne($sql, $params = []){
+
         return $this->fetchAll($sql, $params)[0];
     }
 
