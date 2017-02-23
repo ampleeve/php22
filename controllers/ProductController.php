@@ -9,28 +9,14 @@
 namespace app\controllers;
 use app\models\Product;
 
-class ProductController{
+class ProductController extends Controller{
 
-    protected $action;
-    protected $defaultAction = "index";
-    protected $layout = 'main';
-    protected $useLayout = 'true';
 
-    public function run($action = null){
-
-        $this->action = $action?:$this->defaultAction;
-        $method = 'action' . ucfirst($this->action);
-        $this->$method();
-
-    }
 
     public function actionProduct(){
 
         $id = $_GET['id'];
-        $this->render(
-            'Product',
-            ['model' => Product::getById($id)]
-        );
+        $this->render('Product', ['model' => Product::getById($id)]);
 
     }
 
@@ -40,22 +26,6 @@ class ProductController{
 
     }
 
-    protected function render($template, $params = []){
 
-        $templatePath =
-            $_SERVER['DOCUMENT_ROOT'] .
-            "/../views/{$template}.php";
-        extract($params);
-        ob_start();
-        include $templatePath;
-        ob_get_clean();
-
-    }
-
-    protected function renderTemplate(){
-
-
-
-    }
 
 }
