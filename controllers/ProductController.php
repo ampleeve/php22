@@ -11,8 +11,6 @@ use app\models\Product;
 
 class ProductController extends Controller{
 
-
-
     public function actionProduct(){
 
         $id = $_GET['id'];
@@ -25,7 +23,5 @@ class ProductController extends Controller{
         echo "Index";
 
     }
-
-
 
 }
