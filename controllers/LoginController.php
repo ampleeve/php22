@@ -12,8 +12,21 @@ namespace app\controllers;
 class LoginController extends Controller {
 
     public function actionLogin(){}
-    public function actionRegistrattion(){}
+    public function actionRegistrattion(){
+
+        
+    }
     public function actionLogout(){}
+    public function actionShowform(){
+
+        $this->render('Showform', []);
+
+    }
+    public function actionShowregform(){
+
+        $this->render('Showregform', []);
+
+    }
 
     public function isAuthorized(){}
     public function getCurrentUsername(){}
