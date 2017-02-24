@@ -7,7 +7,14 @@
     <title>Site</title>
 </head>
 <body>
-Лэйаут..<br/>
+<!-- Блок пользователя-->
+<p>Привет, пользователь!</p>
+
+<?php if ($isAuthorized = false): ?>
+    <a href="#">Выйти</a>
+<?php else: ?>
+    <a href="#">Войти</a>
+<?php endif; ?>
 <?= $content ?>
 </body>
 </html>
