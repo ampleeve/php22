@@ -7,7 +7,7 @@
     <title>Site</title>
 </head>
 <body>
-это лэйаут
+Лэйаут..<br/>
 <?= $content ?>
 </body>
 </html>
