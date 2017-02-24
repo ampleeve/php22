@@ -18,8 +18,13 @@ class Order extends Model
 
         $table = static::getTableName();
         $sql =
-                "SELECT {$table}.id as orderID, customer.id as customerID, customer.name as customerNAME,
-                  customer.phone as customerPHONE, {$table}.date as orderDATE FROM {$table} 
+                "SELECT 
+                  {$table}.id as orderID,
+                  customer.id as customerID,
+                  customer.name as customerNAME,
+                  customer.phone as customerPHONE,
+                  {$table}.date as orderDATE
+                  FROM {$table} 
 	              INNER JOIN customer ON order.customerID = customer.id
                   WHERE order.id = :id; ";
         return Db::getInstance()->fetchOne($sql, [":id" => $id]);

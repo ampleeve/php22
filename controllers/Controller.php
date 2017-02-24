@@ -27,6 +27,7 @@ abstract class Controller{
     protected function render($template, $params = []){
 
         if ($this->useLayout){
+
             echo $this->renderTemplate('layouts/'. $this->layout, [
                 'content' => $this->renderTemplate($template, $params)
             ]);
@@ -46,6 +47,8 @@ abstract class Controller{
 
         $templatePath = $_SERVER['DOCUMENT_ROOT'] . "/../views/{$dir}/{$template}.php";
         extract($params);
+        //echo "<pre>";
+        //var_dump($templatePath);die();
         ob_start();
         include $templatePath;
         return ob_get_clean();
