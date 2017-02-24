@@ -55,4 +55,10 @@ abstract class Controller{
 
     }
 
+    protected function redirect($to){
+
+        header('Location: ' . $to);
+        exit();
+    }
+
 }

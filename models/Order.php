@@ -1,8 +1,8 @@
 <?php
 namespace app\models;
 use app\services\Db;
-class Order extends Model
-{
+class Order extends Model{
+
     public $id;
     public $customerId;
     public $date;
