@@ -22,7 +22,42 @@ class Customer extends Model{
 
     }
 
-    public static function login($username, $password){
+    public static function login(){
+
+        if($_POST['email'] && $_POST['password']) {
+            $currentUser = static::isUserExist($_POST['email'], md5($_POST['password']));
+            if (!$currentUser) {
+                return false;
+            }
+            return $currentUser;
+        }
+    }
+
+    private static function isUserExist($username, $password){
+
+            $currentUser = false;
+            foreach (parent::getAll() as $user) {
+                if ($user['username'] == $username) {
+                    $currentUser = $user;
+                    break;
+                }
+            }
+
+            if ($currentUser && $currentUser['password'] == $password) {
+                return $currentUser;
+            }
+
+            return false;
+
+    }
+
+
+    public static function registration(
+                                        $login,
+                                        $password,
+                                        $password2,
+                                        $phone
+                                        ){
 
         $currentUser = false;
         foreach (parent::getAll() as $user) {
@@ -31,14 +66,11 @@ class Customer extends Model{
                 break;
             }
         }
-            //echo "<pre>";
-            //var_dump($password);die();
+
         if ($currentUser && $currentUser['password'] == $password) {
-            //$_SESSION['id'] = $currentUser['id'];
             return $currentUser;
         }
 
         return false;
-
     }
 }

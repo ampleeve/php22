@@ -13,7 +13,7 @@
 <?php if ($isAuthorized == false): ?>
     <a href="">Выйти</a>
 <?php else: ?>
-    <a href="/?c=login&a=showform">Войти</a>
+    <a href="/?c=customer&a=trylogin">Войти</a>
 <?php endif; ?>
 <?= $content ?>
 <br/>
