@@ -7,13 +7,22 @@
  */
 namespace app\controllers;
 use app\models\Customer;
+use app\services\TemplateRenderer;
 
 abstract class Controller{
 
     protected $action;
     protected $defaultAction = "index";
     protected $layout = 'main';
+
     protected $useLayout = true;
+    protected $renderer = null;
+
+    public function __construct(){
+
+        $this->renderer = new TemplateRenderer();
+
+    }
 
     public function run($action = null){
 
@@ -27,11 +36,9 @@ abstract class Controller{
     protected function render($template, $params = []){
 
         if ($this->useLayout){
-
             echo $this->renderTemplate('layouts/'. $this->layout, [
                 'content' => $this->renderTemplate($template, $params),
-                'username' => Customer::getActiveUserName()
-            ]);
+                'username' => Customer::getActiveUserName()]);
         }else{
             echo $this->renderTemplate($template, $params);
         }
@@ -39,18 +46,7 @@ abstract class Controller{
     }
 
     protected function renderTemplate($template, $params = []){
-
-        $dir = '';
-
-        if($template != 'layouts/main'){
-            $dir = lcfirst(str_replace(['Controller', 'app\controllers\\'], '', get_called_class()));
-        }
-
-        $templatePath = $_SERVER['DOCUMENT_ROOT'] . "/../views/{$dir}/{$template}.php";
-        extract($params);
-        ob_start();
-        include $templatePath;
-        return ob_get_clean();
+        return $this->renderer->render($template, $params, get_called_class());
 
     }
 
