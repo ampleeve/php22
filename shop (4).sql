@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Фев 24 2017 г., 23:44
+-- Время создания: Фев 26 2017 г., 11:22
 -- Версия сервера: 10.1.21-MariaDB
 -- Версия PHP: 5.6.30
 
@@ -90,7 +90,9 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`id`, `username`, `phone`, `password`) VALUES
 (1, 'alex@mail.ru', '8945678990', ''),
-(2, 'e@ampleev.com', '89261382009', '202cb962ac59075b964b07152d234b70');
+(2, 'e@ampleev.com', '89261382009', '202cb962ac59075b964b07152d234b70'),
+(7, 'e+1@ampleev.com', '89261382000', '81dc9bdb52d04dc20036dbd8313ed055'),
+(8, 'test@mail.ru', '895678890', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 -- --------------------------------------------------------
 
@@ -258,7 +260,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT для таблицы `order`
 --
