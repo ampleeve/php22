@@ -10,7 +10,7 @@ class Db
     protected $dbConfig = [
         'driver' => 'mysql',
         'host' => 'localhost',
-        'login' => 'root',
+        'customer' => 'root',
         'password' => '',
         'database' => 'shop'
     ];
@@ -21,7 +21,7 @@ class Db
         if (is_null($this->conn)) {
             $this->conn = new PDO(
                 $this->prepareDnsString(),
-                $this->dbConfig['login'],
+                $this->dbConfig['customer'],
                 $this->dbConfig['password']
             );
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Фев 21 2017 г., 16:40
+-- Время создания: Фев 24 2017 г., 23:44
 -- Версия сервера: 10.1.21-MariaDB
 -- Версия PHP: 5.6.30
 
@@ -41,7 +41,7 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`id`, `name`) VALUES
-(1, 'armani'),
+(1, 'Gucci'),
 (2, 'guci'),
 (3, 'hemes'),
 (4, 'bmw');
@@ -67,7 +67,8 @@ INSERT INTO `category` (`id`, `name`) VALUES
 (2, 'Автомобили'),
 (3, 'Мотоциклы'),
 (4, 'Цифровые товары'),
-(5, 'Спортивные товары');
+(5, 'Спортивные товары'),
+(6, 'Аксессуары (Верхняя одежда)');
 
 -- --------------------------------------------------------
 
@@ -78,16 +79,18 @@ INSERT INTO `category` (`id`, `name`) VALUES
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL,
-  `phone` varchar(45) DEFAULT NULL
+  `username` varchar(45) NOT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `password` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `customer`
 --
 
-INSERT INTO `customer` (`id`, `name`, `phone`) VALUES
-(1, 'Александр', '8945678990');
+INSERT INTO `customer` (`id`, `username`, `phone`, `password`) VALUES
+(1, 'alex@mail.ru', '8945678990', ''),
+(2, 'e@ampleev.com', '89261382009', '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
 
@@ -145,23 +148,24 @@ INSERT INTO `orderProduct` (`orderID`, `productID`, `count`) VALUES
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL,
-  `name` varchar(500) DEFAULT NULL,
+  `name` varchar(500) NOT NULL,
   `brandID` int(11) DEFAULT NULL,
   `typeID` int(11) DEFAULT NULL,
   `categoryID` int(11) DEFAULT NULL,
-  `price` decimal(20,2) DEFAULT NULL,
-  `vendorCode` varchar(150) DEFAULT NULL
+  `price` decimal(20,2) NOT NULL,
+  `vendorCode` varchar(150) DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `product`
 --
 
-INSERT INTO `product` (`id`, `name`, `brandID`, `typeID`, `categoryID`, `price`, `vendorCode`) VALUES
-(3, 'Перчатки Guci', 1, 1, 1, '100.00', NULL),
-(4, 'Автомобиль bmw', 2, 2, 2, '200.00', NULL),
-(5, 'Гольфы Hermes', 1, 1, 1, '300.00', NULL),
-(6, 'Ласины Nike', 2, 2, 2, '400.00', NULL);
+INSERT INTO `product` (`id`, `name`, `brandID`, `typeID`, `categoryID`, `price`, `vendorCode`, `description`) VALUES
+(3, 'Перчатки Gucci', 1, 1, 6, '100.00', 'ИП Иванов А.', 'Перчатки для любого сезона, кожаные, замечательные'),
+(4, 'Автомобиль BMW', 2, 2, 2, '200.00', 'ООО \"БЭЭМВЭ\"', 'Хороший автомобиль немецкий'),
+(5, 'Гольфы Hermes', 1, 1, 1, '300.00', 'ООО \"Милан\"', 'Нормально для игры в поло'),
+(6, 'Лосины Nike', 2, 2, 2, '400.00', 'ООО \"НАЙК\"', 'Ух какие лосинки, бери!');
 
 -- --------------------------------------------------------
 
@@ -180,7 +184,7 @@ CREATE TABLE `type` (
 --
 
 INSERT INTO `type` (`id`, `name`) VALUES
-(1, 'шапки'),
+(1, 'перчатки'),
 (2, 'верхняя одежда'),
 (3, 'мужское'),
 (4, 'женское');
@@ -218,7 +222,8 @@ ALTER TABLE `order`
 -- Индексы таблицы `orderProduct`
 --
 ALTER TABLE `orderProduct`
-  ADD PRIMARY KEY (`orderID`,`productID`);
+  ADD PRIMARY KEY (`orderID`,`productID`),
+  ADD KEY `fkProductID_idx` (`productID`);
 
 --
 -- Индексы таблицы `product`
@@ -248,12 +253,12 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `order`
 --
@@ -278,6 +283,13 @@ ALTER TABLE `type`
 --
 ALTER TABLE `order`
   ADD CONSTRAINT `fkCustomerOrder` FOREIGN KEY (`customerID`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ограничения внешнего ключа таблицы `orderProduct`
+--
+ALTER TABLE `orderProduct`
+  ADD CONSTRAINT `fkOrderID` FOREIGN KEY (`orderID`) REFERENCES `order` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fkProductID` FOREIGN KEY (`productID`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Ограничения внешнего ключа таблицы `product`

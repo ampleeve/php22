@@ -7,7 +7,17 @@
     <title>Site</title>
 </head>
 <body>
-Лэйаут..<br/>
+<!-- Блок пользователя-->
+<p>Привет, <?= $username?$username:'Гость'?>!</p>
+
+<?php if ($username): ?>
+    <a href="/?c=customer&a=logout">Выйти</a>
+<?php else: ?>
+    <a href="/?c=customer&a=trylogin">Войти</a>
+<?php endif; ?>
 <?= $content ?>
+<br/>
+<br/>
+<a href="/">На главную</a>
 </body>
 </html>

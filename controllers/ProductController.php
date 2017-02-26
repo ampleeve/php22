@@ -26,7 +26,8 @@ class ProductController extends Controller{
 
     public function actionIndex(){
 
-        echo "Index";
+        //echo "Index";
+        $this->actionProducts();
 
     }
 

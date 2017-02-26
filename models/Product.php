@@ -1,8 +1,8 @@
 <?php
 namespace app\models;
 use app\services\Db;
-class Product extends Model
-{
+class Product extends Model{
+
     public $id;
     public $name;
     public $price;
@@ -16,7 +16,7 @@ class Product extends Model
 
     public static function getTableName()
     {
-        return "product";
+        return 'product';
     }
 
     public static function getAllProductById($id){

@@ -5,9 +5,8 @@
  * Date: 23.02.17
  * Time: 13:56
  */
-
 namespace app\controllers;
-
+use app\models\Customer;
 
 abstract class Controller{
 
@@ -18,6 +17,7 @@ abstract class Controller{
 
     public function run($action = null){
 
+        $this->startSession();
         $this->action = $action?:$this->defaultAction;
         $method = 'action' . ucfirst($this->action);
         $this->$method();
@@ -29,7 +29,8 @@ abstract class Controller{
         if ($this->useLayout){
 
             echo $this->renderTemplate('layouts/'. $this->layout, [
-                'content' => $this->renderTemplate($template, $params)
+                'content' => $this->renderTemplate($template, $params),
+                'username' => Customer::getActiveUserName()
             ]);
         }else{
             echo $this->renderTemplate($template, $params);
@@ -47,12 +48,22 @@ abstract class Controller{
 
         $templatePath = $_SERVER['DOCUMENT_ROOT'] . "/../views/{$dir}/{$template}.php";
         extract($params);
-        //echo "<pre>";
-        //var_dump($templatePath);die();
         ob_start();
         include $templatePath;
         return ob_get_clean();
 
+    }
+
+    protected function redirect($to){
+
+        header('Location: ' . $to);
+        exit();
+    }
+
+    protected function startSession() {
+
+        if ( session_id() ) return true;
+        else return session_start();
     }
 
 }
