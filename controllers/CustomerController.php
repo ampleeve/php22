@@ -12,15 +12,11 @@ use app\models\Customer;
 class CustomerController extends Controller {
 
     public function actionTrylogin(){
-
         $this->render('Login', []);
-
     }
 
     public function actionLogin(){
-
         $isOk = Customer::login();
-
         if($isOk){
             $_SESSION['id'] = $isOk;
             $this->redirect("/");
@@ -29,19 +25,15 @@ class CustomerController extends Controller {
     }
 
     public function actionLogout(){
-
         unset($_SESSION['id']);
         $this->redirect("/");
     }
 
     public function actionTryregistration(){
-
         $this->render('Registration', []);
-
     }
 
     public function actionRegistration(){
-
         $err = Customer::registration();
         if($err){
             echo $err;
