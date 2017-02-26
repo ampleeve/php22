@@ -63,4 +63,40 @@ class Customer extends Model{
 
         return false;
     }
+
+    public static function registration(){
+
+        $errRes = false;
+
+        if ($_POST['login'] &&
+            $_POST['password'] &&
+            $_POST['password2'] &&
+            $_POST['phone'] ){
+
+            foreach (Customer::getAll() as $user) {
+                if ($_POST['login'] == $user['username']) {
+                    $errRes .= "Пользователь ". $user['username']. " уже зарегистрирован. <br/>";
+                }
+            }
+
+            if($_POST['password']!=$_POST['password2']){
+
+                $errRes .= "Пароли не совпадают";
+            }
+
+            if(!$errRes){
+                static::createCustomer($_POST['login'], $_POST['password'], $_POST['phone']);
+            }
+        }
+    }
+
+    private static function createCustomer($username, $password, $phone){
+
+        $table = static::getTableName();
+        $sql =
+            "INSERT INTO
+                {$table} (`username`, `phone`, `password`)
+                VALUES (:username, :phone, :password)";
+        Db::getInstance()->execute($sql,[":username" => $username, ":phone" => $phone, ":password" => md5($password)]);
+    }
 }
