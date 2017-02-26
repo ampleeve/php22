@@ -8,10 +8,10 @@
 </head>
 <body>
 <!-- Блок пользователя-->
-<p>Привет, пользователь!</p>
+<p>Привет, <?= $username?$username:'Гость'?>!</p>
 
-<?php if ($isAuthorized == false): ?>
-    <a href="">Выйти</a>
+<?php if ($username): ?>
+    <a href="/?c=customer&a=logout">Выйти</a>
 <?php else: ?>
     <a href="/?c=customer&a=trylogin">Войти</a>
 <?php endif; ?>

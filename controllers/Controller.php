@@ -5,9 +5,8 @@
  * Date: 23.02.17
  * Time: 13:56
  */
-
 namespace app\controllers;
-
+use app\models\Customer;
 
 abstract class Controller{
 
@@ -15,10 +14,10 @@ abstract class Controller{
     protected $defaultAction = "index";
     protected $layout = 'main';
     protected $useLayout = true;
-    protected $isAuthorized = true;
 
     public function run($action = null){
 
+        $this->startSession();
         $this->action = $action?:$this->defaultAction;
         $method = 'action' . ucfirst($this->action);
         $this->$method();
@@ -31,7 +30,7 @@ abstract class Controller{
 
             echo $this->renderTemplate('layouts/'. $this->layout, [
                 'content' => $this->renderTemplate($template, $params),
-                'isAuthorized' => $this->isAuthorized
+                'username' => Customer::getActiveUserName()
             ]);
         }else{
             echo $this->renderTemplate($template, $params);
@@ -59,6 +58,12 @@ abstract class Controller{
 
         header('Location: ' . $to);
         exit();
+    }
+
+    protected function startSession() {
+
+        if ( session_id() ) return true;
+        else return session_start();
     }
 
 }

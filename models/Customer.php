@@ -29,7 +29,7 @@ class Customer extends Model{
             if (!$currentUser) {
                 return false;
             }
-            return $currentUser;
+            return $currentUser['id'];
         }
     }
 
@@ -51,24 +51,14 @@ class Customer extends Model{
 
     }
 
+    public static function getActiveUserName(){
 
-    public static function registration(
-                                        $login,
-                                        $password,
-                                        $password2,
-                                        $phone
-                                        ){
-
-        $currentUser = false;
-        foreach (parent::getAll() as $user) {
-            if ($user['username'] == $username) {
-                $currentUser = $user;
-                break;
-            }
-        }
-
-        if ($currentUser && $currentUser['password'] == $password) {
-            return $currentUser;
+        if (!empty($_SESSION['id'])) {
+                foreach (Customer::getAll() as $user) {
+                    if ($_SESSION['id'] == $user['id']) {
+                        return $user['username'];
+                    }
+                }
         }
 
         return false;
