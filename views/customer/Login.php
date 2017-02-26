@@ -8,5 +8,5 @@
 </form>
 <br/>
 <br/>
-<a href="/?c=customer&a=showregform">Зарегистрироваться</a>
+<a href="/?c=customer&a=tryregistration">Зарегистрироваться</a>
 </body>

@@ -11,20 +11,22 @@ use app\models\Customer;
 
 class CustomerController extends Controller {
 
+    public function actionTrylogin(){
+
+        $this->render('Login', []);
+
+    }
+
     public function actionLogin(){
 
         $isOk = Customer::login();
 
         if($isOk){
-            //$this->startSession();
             $_SESSION['id'] = $isOk;
             $this->redirect("/");
         }
-
         echo "Ошибка авторизации"; exit();
-
     }
-
 
     public function actionLogout(){
 
@@ -32,10 +34,21 @@ class CustomerController extends Controller {
         $this->redirect("/");
     }
 
+    public function actionTryregistration(){
 
-    public function actionTrylogin(){
-
-        $this->render('Login', []);
+        $this->render('Registration', []);
 
     }
+
+    public function actionRegistration(){
+
+        $err = Customer::registration();
+        if($err){
+            echo $err;
+            echo "<br/>";
+        }else{
+           $this->redirect("/?c=customer&a=trylogin");
+        }
+    }
+
 }
