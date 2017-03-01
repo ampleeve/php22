@@ -6,9 +6,9 @@
  * Time: 13:56
  */
 namespace app\controllers;
+use app\interfaces\IRenderer;
 use app\models\Customer;
-use app\services\TemplateRenderer;
-
+//use app\services\TemplateRenderer;
 abstract class Controller{
 
     protected $action;
@@ -18,9 +18,9 @@ abstract class Controller{
     protected $useLayout = true;
     protected $renderer = null;
 
-    public function __construct(){
+    public function __construct(IRenderer $renderer){
 
-        $this->renderer = new TemplateRenderer();
+        $this->renderer = $renderer;
 
     }
 
@@ -46,7 +46,13 @@ abstract class Controller{
     }
 
     protected function renderTemplate($template, $params = []){
-        return $this->renderer->render($template, $params, get_called_class());
+        //echo "<pre>";
+        //var_dump($template);die();
+        //if($template!='Products'){
+          //  echo "<pre>";
+            //var_dump($template);die();
+        //}
+        return $this->renderer->render($template, $params);
 
     }
 
