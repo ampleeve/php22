@@ -10,7 +10,7 @@ $viewDir = $controllerName;
 $actionName =  isset($_REQUEST['a']) ? $_REQUEST['a'] : null;
 
 $controllerName = sprintf("app\controllers\%sController", ucfirst($controllerName));
-$controller = new $controllerName(new app\services\TwigRenderer($viewDir));
+$controller = new $controllerName(new app\services\TwigRenderer());
 $controller->run($actionName);
 
 
