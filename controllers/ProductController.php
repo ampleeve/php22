@@ -23,8 +23,8 @@ class ProductController extends Controller{
     }
 
     public function actionIndex(){
-        //$this->actionProducts();
-        $this->render('products');
+        $this->actionProducts();
+        //$this->render('products');
     }
 
 }
