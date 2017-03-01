@@ -46,7 +46,13 @@ abstract class Controller{
     }
 
     protected function renderTemplate($template, $params = []){
-        return $this->renderer->render($template, $params, get_called_class());
+        //echo "<pre>";
+        //var_dump($template);die();
+        //if($template!='Products'){
+          //  echo "<pre>";
+            //var_dump($template);die();
+        //}
+        return $this->renderer->render($template, $params);
 
     }
 
