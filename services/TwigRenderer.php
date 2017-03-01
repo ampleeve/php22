@@ -9,11 +9,9 @@ class TwigRenderer implements IRenderer {
     protected $templateDir;
     protected $templater;
 
-    public function __construct($dir){
-        echo "<pre>";
-        var_dump($_SERVER['DOCUMENT_ROOT'] . "/../views");die();
-        //$this->templateDir = $_SERVER['DOCUMENT_ROOT'] . "/../views/" . $dir;
-        $this->templateDir = "/Applications/XAMPP/xamppfiles/htdocs/php22.com/views/product";
+    public function __construct(){
+        //$this->templateDir = $_SERVER['DOCUMENT_ROOT'] . "/../views";
+        $this->templateDir = "/Applications/XAMPP/xamppfiles/htdocs/php22.com/views/product/";
         $loader = new Twig_Loader_Filesystem($this->templateDir);
         $this->templater = new \Twig_Environment($loader);
     }
