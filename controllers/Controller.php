@@ -13,9 +13,9 @@ abstract class Controller{
 
     protected $action;
     protected $defaultAction = "index";
-    protected $layout = 'main.twig';
+    protected $layout = 'main';
 
-    protected $useLayout = false;
+    protected $useLayout = true;
     protected $renderer = null;
 
     public function __construct(IRenderer $renderer){
@@ -36,11 +36,9 @@ abstract class Controller{
     protected function render($template, $params = []){
 
         if ($this->useLayout){
-
-            echo $this->renderer->render('layouts/'. $this->layout, [
+            echo $this->renderTemplate('layouts/'. $this->layout, [
                 'content' => $this->renderTemplate($template, $params),
                 'username' => Customer::getActiveUserName()]);
-
         }else{
             echo $this->renderTemplate($template, $params);
         }
@@ -48,7 +46,7 @@ abstract class Controller{
     }
 
     protected function renderTemplate($template, $params = []){
-        return $this->renderer->render($template, $params);
+        return $this->renderer->render($template, $params, get_called_class());
 
     }
 

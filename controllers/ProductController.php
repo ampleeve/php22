@@ -7,12 +7,11 @@
  */
 
 namespace app\controllers;
-use app\interfaces\IRenderer;
 use app\models\Product;
 
 class ProductController extends Controller{
 
-    //protected $useLayout = false;
+    protected $useLayout = false;
 
     public function actionProduct(){
         $id = $_GET['id'];
@@ -24,8 +23,8 @@ class ProductController extends Controller{
     }
 
     public function actionIndex(){
-        $this->actionProducts();
-        //$this->render('products');
+        //$this->actionProducts();
+        $this->render('products');
     }
 
 }
