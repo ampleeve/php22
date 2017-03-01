@@ -7,9 +7,9 @@
  */
 
 namespace app\services;
+use app\interfaces\IRenderer;
 
-
-class TemplateRenderer{
+class TemplateRenderer implements IRenderer {
 
     public function render($template, $params = [], $className){
 

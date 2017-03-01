@@ -11,6 +11,8 @@ use app\models\Product;
 
 class ProductController extends Controller{
 
+    protected $useLayout = false;
+
     public function actionProduct(){
         $id = $_GET['id'];
         $this->render('Product', ['model' => Product::getAllProductById($id)]);
@@ -21,7 +23,8 @@ class ProductController extends Controller{
     }
 
     public function actionIndex(){
-        $this->actionProducts();
+        //$this->actionProducts();
+        $this->render('index');
     }
 
 }
