@@ -1,5 +1,5 @@
 <?php
-//error_reporting( E_ERROR );
+error_reporting( E_ERROR );
 include_once "../vendor/autoload.php";
 include_once "../services/Autoloader.php";
 spl_autoload_register([new Autoloader(),'loadClass']);
@@ -10,7 +10,7 @@ $viewDir = $controllerName;
 $actionName =  isset($_REQUEST['a']) ? $_REQUEST['a'] : null;
 
 $controllerName = sprintf("app\controllers\%sController", ucfirst($controllerName));
-$controller = new $controllerName(new app\services\TwigRenderer($viewDir));
+$controller = new $controllerName(new \app\services\TemplateRenderer());
 $controller->run($actionName);
 
 

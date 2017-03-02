@@ -11,14 +11,9 @@ use app\interfaces\IRenderer;
 
 class TemplateRenderer implements IRenderer {
 
-    public function render($template, $params = [], $className){
+    public function render($template, $params = []){
 
-        $dir = '';
-        if($template != 'layouts/main'){
-            $dir = lcfirst(str_replace(['Controller', 'app\controllers\\'], '', $className));
-        }
-
-        $templatePath = $_SERVER['DOCUMENT_ROOT'] . "/../views/{$dir}/{$template}.php";
+        $templatePath = $_SERVER['DOCUMENT_ROOT'] . "/../views/{$template}.php";
         extract($params);
         ob_start();
         include $templatePath;

@@ -11,7 +11,7 @@ use app\models\Product;
 
 class ProductController extends Controller{
 
-    protected $useLayout = false;
+   // protected $useLayout = true;
 
     public function actionProduct(){
         $id = $_GET['id'];
@@ -19,7 +19,7 @@ class ProductController extends Controller{
     }
 
     public function actionProducts(){
-        $this->render('Products', ['model' => Product::getAll()]);
+        $this->render('product/Products', ['model' => Product::getAll()]);
     }
 
     public function actionIndex(){

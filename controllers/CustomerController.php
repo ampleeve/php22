@@ -13,7 +13,7 @@ class CustomerController extends Controller {
 
     public function actionTrylogin(){
 
-        $this->render('Login', []);
+        $this->render('customer/Login', []);
 
     }
 
@@ -36,7 +36,7 @@ class CustomerController extends Controller {
 
     public function actionTryregistration(){
 
-        $this->render('Registration', []);
+        $this->render('customer/Registration', []);
 
     }
 
