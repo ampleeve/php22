@@ -35,23 +35,23 @@ abstract class Controller{
 
     protected function render($template, $params = []){
 
+        //echo "<pre>";
+        //var_dump($template);die();
+
+
         if ($this->useLayout){
             echo $this->renderTemplate('layouts/'. $this->layout, [
                 'content' => $this->renderTemplate($template, $params),
                 'username' => Customer::getActiveUserName()]);
         }else{
+            //$template = lcfirst(str_replace(['Controller','app\controllers\\'],'', get_called_class()));
             echo $this->renderTemplate($template, $params);
         }
 
     }
 
     protected function renderTemplate($template, $params = []){
-        //echo "<pre>";
-        //var_dump($template);die();
-        //if($template!='Products'){
-          //  echo "<pre>";
-            //var_dump($template);die();
-        //}
+
         return $this->renderer->render($template, $params);
 
     }

@@ -9,5 +9,5 @@
 </form>
 <br/>
 <br/>
-<a href="/?c=login&a=showform">Авторизоваться</a>
+<a href="/?c=customer&a=trylogin">Авторизоваться</a>
 </body>
