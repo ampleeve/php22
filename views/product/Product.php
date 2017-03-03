@@ -9,7 +9,7 @@
     <strong>Описание:</strong> <?= $model->description ?> <br/>
     <i>Поставщик:</i> <?= $model->vendor ?> <br/>
     <i>ID товара:</i> <?= $model->id ?> <br/><br/>
-    <a href="/?c=product&a=products">к списку всех товаров</a>
+    <a href="/product/index">к списку всех товаров</a>
 </p>
 
 </body>

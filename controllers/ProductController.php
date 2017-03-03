@@ -15,7 +15,7 @@ class ProductController extends Controller{
 
     public function actionProduct(){
         $id = $_GET['id'];
-        $this->render('Product', ['model' => Product::getAllProductById($id)]);
+        $this->render('product/Product', ['model' => Product::getAllProductById($id)]);
     }
 
     public function actionProducts(){

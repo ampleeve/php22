@@ -18,7 +18,7 @@ abstract class Controller{
     protected $useLayout = true;
     protected $renderer = null;
 
-    public function __construct(IRenderer $renderer){
+    public function __construct(IRenderer $renderer = null){
 
         $this->renderer = $renderer;
 
