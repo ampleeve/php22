@@ -22,7 +22,7 @@ class RequestManager{
             if(preg_match_all($rule, $this->requestString, $matches)){
                 $this->controllerName = $matches['controller'][0];
                 $this->actionName = $matches['action'][0];
-                $this->params = explode('/',$matches['params'][0]);
+                $this->params = array_merge(explode('/',$matches['params'][0]), $_REQUEST);
                 break;
             }
         }
