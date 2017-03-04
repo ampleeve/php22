@@ -47,7 +47,7 @@ class CustomerController extends Controller {
             echo $err;
             echo "<br/>";
         }else{
-           $this->redirect("/?c=customer&a=trylogin");
+           $this->redirect("/customer/trylogin");
         }
     }
 

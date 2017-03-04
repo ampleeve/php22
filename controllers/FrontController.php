@@ -12,8 +12,6 @@ class FrontController extends Controller {
 
         /** @var  Controller $controller */
         $controller = new $controllerName(new \app\services\TemplateRenderer());
-        //echo "<pre>";
-        //var_dump($params);die();
         $controller->run($actionName, $params);
     }
 
