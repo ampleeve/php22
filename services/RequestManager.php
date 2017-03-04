@@ -25,9 +25,11 @@ class RequestManager{
                 $this->params = array_merge(explode('/',$matches['params'][0]), $_REQUEST);
                 break;
             }
+            else{
+                $this->controllerName = 'Product';
+                $this->actionName = 'index';
+            }
         }
-        echo "<pre>";
-        var_dump($this);die();
     }
 
     public function getControllerName(){
@@ -36,6 +38,10 @@ class RequestManager{
 
     public function getActionName(){
         return $this->actionName;
+    }
+
+    public function getParams(){
+        return $this->params;
     }
 
 }

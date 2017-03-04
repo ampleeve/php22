@@ -24,12 +24,12 @@ abstract class Controller{
 
     }
 
-    public function run($action = null){
+    public function run($action = null, $params){
 
         $this->startSession();
         $this->action = $action?:$this->defaultAction;
         $method = 'action' . ucfirst($this->action);
-        $this->$method();
+        $this->$method($params);
 
     }
 

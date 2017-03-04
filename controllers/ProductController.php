@@ -13,8 +13,11 @@ class ProductController extends Controller{
 
    // protected $useLayout = true;
 
-    public function actionProduct(){
-        $id = $_GET['id'];
+    public function actionProduct($params){
+
+        //echo "<pre>";
+        //var_dump($params);die();
+        $id = $params[0];
         $this->render('product/Product', ['model' => Product::getAllProductById($id)]);
     }
 
