@@ -18,18 +18,18 @@ abstract class Controller{
     protected $useLayout = true;
     protected $renderer = null;
 
-    public function __construct(IRenderer $renderer){
+    public function __construct(IRenderer $renderer = null){
 
         $this->renderer = $renderer;
 
     }
 
-    public function run($action = null){
+    public function run($action = null, $params){
 
         $this->startSession();
         $this->action = $action?:$this->defaultAction;
         $method = 'action' . ucfirst($this->action);
-        $this->$method();
+        $this->$method($params);
 
     }
 

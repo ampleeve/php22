@@ -11,9 +11,9 @@
 <p>Привет, <?= $username?$username:'Гость'?>!</p>
 
 <?php if ($username): ?>
-    <a href="/?c=customer&a=logout">Выйти</a>
+    <a href="/customer/logout">Выйти</a>
 <?php else: ?>
-    <a href="/?c=customer&a=trylogin">Войти</a>
+    <a href="/customer/trylogin">Войти</a>
 <?php endif; ?>
 <?= $content ?>
 <br/>
