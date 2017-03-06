@@ -14,6 +14,8 @@ class TemplateRenderer implements IRenderer {
     public function render($template, $params = []){
 
         $templatePath = $_SERVER['DOCUMENT_ROOT'] . "/../views/{$template}.php";
+        //echo "<pre>";
+        //var_dump($templatePath);die();
         extract($params);
         ob_start();
         include $templatePath;

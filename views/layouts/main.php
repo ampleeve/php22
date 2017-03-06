@@ -13,7 +13,7 @@
 <?php if ($username): ?>
     <a href="/customer/logout">Выйти</a>
 <?php else: ?>
-    <a href="/customer/trylogin">Войти</a>
+    <a href="/auth/">Войти</a>
 <?php endif; ?>
 <?= $content ?>
 <br/>

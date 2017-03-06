@@ -1,15 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: evgenijampleev
- * Date: 04.03.17
- * Time: 15:54
- */
-
 namespace app\controllers;
+use app\services\Auth;
 
+class AuthController extends Controller {
 
-class AuthController
-{
+    protected $useLayout = true;
 
+    public function actionIndex(){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login']) && isset($_POST['pass'])){
+
+            if((new Auth())->login($_POST['login'], $_POST['pass'])){
+
+                $this->redirect("product/");
+            }
+
+        }
+        $this->render('auth/login');
+    }
 }
