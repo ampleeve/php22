@@ -2,8 +2,7 @@
 namespace app\services;
 use app\traits\TSingltone;
 use \PDO;
-class Db
-{
+ class Db{
     use TSingltone;
 
     protected $conn;
@@ -36,11 +35,10 @@ class Db
      * @param $params
      * @return PDOStatement
      */
-    public function query($sql, $params = [])
-    {
+    public function query($sql, $params = []){
+
         $smtp = $this->getConnection()->prepare($sql);
         $smtp->execute($params);
-        return $smtp;
     }
 
     public function fetchAll($sql, $params = [])
@@ -82,4 +80,4 @@ class Db
             $this->dbConfig['database']
         );
     }
-}
+ }

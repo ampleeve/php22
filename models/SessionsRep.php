@@ -23,14 +23,14 @@ class SessionsRep
     public function clearSessions()
     {
         return Db::getInstance()->execute(
-            sprintf("DELETE FROM sessions WHERE last_update < %s", date('Y-m-d H:i:s', time() - 60 * 20))
+            sprintf("DELETE FROM sessions WHERE lastUpdate < %s", date('Y-m-d H:i:s', time() - 60 * 20))
         );
     }
 
     public function createNew($userId, $sid, $timeLast)
     {
         return Db::getInstance()->execute(
-            "INSERT INTO sessions(user_id, sid, last_update) VALUES (? ,? , ?)",
+            "INSERT INTO sessions(userId, sid, lastUpdate) VALUES (? ,? , ?)",
             [$userId, $sid, $timeLast]
         );
     }
@@ -41,13 +41,13 @@ class SessionsRep
             $time = date('Y-m-d H:i:s');
         }
         return Db::getInstance()->execute(
-            "UPDATE sessions SET last_update = '{$time}' WHERE sid = '{$sid}'");
+            "UPDATE sessions SET lastUpdate = '{$time}' WHERE sid = '{$sid}'");
     }
 
     public function getUidBySid($sid)
     {
         return Db::getInstance()->fetchOne(
-            "SELECT user_id FROM sessions WHERE sid = ?", [$sid]
-        )['user_id'];
+            "SELECT userId FROM sessions WHERE sid = ?", [$sid]
+        )['userId'];
     }
 }

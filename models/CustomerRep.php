@@ -16,8 +16,8 @@ class CustomerRep{
 
     public function getByLoginPass($login, $pass){
 
-       // echo "<pre>";
-        //var_dump(md5($pass));die();
+        //echo "<pre>";
+        //var_dump($this->conn->fetchObject());die();
 
         return $this->conn->fetchObject(
             sprintf("SELECT * FROM customer WHERE username = '%s' AND password = '%s'", $login, md5($pass)

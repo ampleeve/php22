@@ -2,7 +2,8 @@
 namespace app\controllers;
 use app\models\Customer;
 use app\services\RequestManager;
-class FrontController extends Controller {
+
+ class FrontController extends Controller {
 
     protected $controllerName;
     protected $actionName;
@@ -26,6 +27,8 @@ class FrontController extends Controller {
         if($this->controllerName != 'auth'){
 
             session_start();
+            //echo "<pre>";
+            //var_dump($_SESSION);die();
             $user = (new Customer())->getCurrent();
             if(!$user){
                 $this->redirect('auth');
@@ -35,4 +38,4 @@ class FrontController extends Controller {
 
     }
 
-}
+ }

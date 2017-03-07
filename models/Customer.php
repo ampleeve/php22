@@ -1,6 +1,6 @@
 <?php
 namespace app\models;
-class Customer{
+ class Customer{
 
     protected $id;
     protected $username;
@@ -21,5 +21,4 @@ class Customer{
 
     }
 
-
-}
+ }
