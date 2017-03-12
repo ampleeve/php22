@@ -1,5 +1,6 @@
 <?php
 namespace app\models;
+use app\base\Application;
 use app\services\Db;
 abstract class Model
 {
@@ -17,7 +18,7 @@ abstract class Model
     public static function getAll(){
         $table = static::getTableName();
         $sql = "SELECT * FROM {$table}";
-        return Db::getInstance()->fetchAll($sql);
+        return Application::call()->db->myFetchAll($sql);
     }
 
 }

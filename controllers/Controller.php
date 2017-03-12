@@ -9,12 +9,11 @@ namespace app\controllers;
 use app\interfaces\IRenderer;
 use app\models\Customer;
 //use app\services\TemplateRenderer;
-abstract class Controller{
+ class Controller{
 
     protected $action;
     protected $defaultAction = "index";
     protected $layout = 'main';
-
     protected $useLayout = true;
     protected $renderer = null;
 
@@ -24,27 +23,21 @@ abstract class Controller{
 
     }
 
-    public function run($action = null, $params){
+    public function run($action = null, $params = []){
 
-        $this->startSession();
         $this->action = $action?:$this->defaultAction;
-        $method = 'action' . ucfirst($this->action);
-        $this->$method($params);
+        $action = 'action' . ucfirst($this->action);
+        $this->beforeAction();
+        $this->$action();
+        $this->afterAction();
 
     }
 
     protected function render($template, $params = []){
 
-        //echo "<pre>";
-        //var_dump($template);die();
-
-
         if ($this->useLayout){
-            echo $this->renderTemplate('layouts/'. $this->layout, [
-                'content' => $this->renderTemplate($template, $params),
-                'username' => Customer::getActiveUserName()]);
+            echo $this->renderTemplate('layouts/'. $this->layout, ['content' => $this->renderTemplate($template, $params)]);
         }else{
-            //$template = lcfirst(str_replace(['Controller','app\controllers\\'],'', get_called_class()));
             echo $this->renderTemplate($template, $params);
         }
 
@@ -56,16 +49,12 @@ abstract class Controller{
 
     }
 
+    protected function beforeAction(){}
+    protected function afterAction(){}
+
     protected function redirect($to){
 
         header('Location: ' . $to);
-        exit();
+
     }
-
-    protected function startSession() {
-
-        if ( session_id() ) return true;
-        else return session_start();
-    }
-
 }

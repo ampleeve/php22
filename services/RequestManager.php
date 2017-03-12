@@ -13,7 +13,6 @@ class RequestManager{
 
     public function __construct(){
         $this->parseRequest();
-
     }
 
     public function parseRequest(){
@@ -33,6 +32,8 @@ class RequestManager{
     }
 
     public function getControllerName(){
+        //echo "<pre>";
+        //var_dump($this->controllerName);die();
         return $this->controllerName;
     }
 

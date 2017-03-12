@@ -1,0 +1,70 @@
+<div>
+    <form lang="ru" show-examples-on-focus="true" is-dev="false" name="NForm">
+        <input type="hidden" name="submitted" value="true" />
+        <input type="hidden" name="agentcode" value="{$parser/form/agentcode}" />
+        <input type="hidden" name="inn" value="{$parser/form/inn}" />
+        <input type="select" name="product" required="true" accept="ru,dash" convert="en-ru">
+        <label>Выберите продукт</label>
+        <value value="">
+            <label></label>
+        </value>
+        <value value="Кредитная карта">
+            <label>Кредитная карта</label>
+        </value>
+        <value value="Кредит наличными">
+            <label>Кредит наличными</label>
+        </value>
+        <value value="Пакет Услуг Комфорт">
+            <label>Пакет Услуг Комфорт</label>
+        </value>
+        <value value="Пакет Услуг Максимум">
+            <label>Пакет Услуг Максимум</label>
+        </value>
+        </input>
+
+        <input type="text" name="last_name" required="true" accept="ru,dash" convert="en-ru" >
+        <label>#last_name#</label>
+        </input>
+        <input type="text" name="first_name" required="true" accept="ru,dash" convert="en-ru" >
+        <label>#first_name#</label>
+        </input>
+        <input type="text" name="mid_name" required="true" accept="ru,dash" convert="en-ru" >
+        <label>#mid_name#</label>
+        </input>
+        <input type="date" name="bdate" required="true" format="d-m-Y" min="-80y" max="-18y" >
+        <label>#bdate#</label>
+        </input>
+
+        <input type="select" name="region" id="region" required="true">
+        <label>Ваш регион</label>
+        <value value="">
+            <label>...</label>
+        </value>
+        ##nf-region##
+        </input>
+
+        <input type="phone" name="phonenumber" required="true" >
+        <label>#phonenumber#</label>
+        <example>#phonenumber_example#</example>
+        </input>
+
+        <input type="email" name="email">
+        <label>#email#</label>
+        </input>
+
+        <input type="checkset" name="eula_agree" required="true">
+        <label>#eula_agree#</label>
+        <value value="1">
+            <label></label>
+        </value>
+        </input>
+
+        <!-- <input type="text" name="manager_name" required="true" accept="ru,dash,space" convert="en-ru" >
+         <label>#manager_name#</label>
+         </input> -->
+
+        <input type="submit" name="submit" id="submit-button">
+        <label>#submit#</label>
+        </input>
+    </form>
+</div>

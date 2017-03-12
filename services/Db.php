@@ -2,31 +2,43 @@
 namespace app\services;
 use app\traits\TSingltone;
 use \PDO;
-class Db
-{
-    use TSingltone;
+ class Db{
 
     protected $conn;
-    protected $dbConfig = [
+    protected $config = [
         'driver' => 'mysql',
         'host' => 'localhost',
-        'customer' => 'root',
+        'user' => 'root',
         'password' => '',
         'database' => 'shop'
     ];
 
+     /**
+      * Db constructor.
+      * @param array $config
+      */
+     public function __construct($driver, $host, $user, $password, $database){
+         $this->config['driver'] = $driver;
+         $this->config['host'] = $host;
+         $this->config['user'] = $user;
+         $this->config['password'] = $password;
+         $this->config['database'] = $database;
+     }
+
 
     public function getConnection()
     {
+
         if (is_null($this->conn)) {
             $this->conn = new PDO(
                 $this->prepareDnsString(),
-                $this->dbConfig['customer'],
-                $this->dbConfig['password']
+                $this->config['user'],
+                $this->config['password']
             );
 
             $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
         }
         return $this->conn;
     }
@@ -36,15 +48,14 @@ class Db
      * @param $params
      * @return PDOStatement
      */
-    public function query($sql, $params = [])
-    {
+    public function query($sql, $params = []){
         $smtp = $this->getConnection()->prepare($sql);
         $smtp->execute($params);
         return $smtp;
     }
 
-    public function fetchAll($sql, $params = [])
-    {
+    public function myFetchAll($sql, $params = []){
+
         $smtp = $this->query($sql, $params);
         return $smtp->fetchAll();
     }
@@ -67,7 +78,7 @@ class Db
      * @param $params
      * @return int - количество обработанных запросом строк
      */
-    public function execute($sql, $params = [])
+    public function myExecute($sql, $params = [])
     {
         $this->query($sql, $params);
         return true;
@@ -77,9 +88,9 @@ class Db
     {
         return sprintf(
             "%s:host=%s;dbname=%s;charset=UTF8",
-            $this->dbConfig['driver'],
-            $this->dbConfig['host'],
-            $this->dbConfig['database']
+            $this->config['driver'],
+            $this->config['host'],
+            $this->config['database']
         );
     }
-}
+ }
