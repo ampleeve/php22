@@ -1,5 +1,6 @@
 <?php
 namespace app\models;
+use app\base\Application;
 use app\services\Db;
 
 class CustomerRep{
@@ -10,7 +11,7 @@ class CustomerRep{
 
     public function __construct(){
 
-        $this->conn = DB::getInstance();
+        $this->conn = Application::call()->db;
 
     }
 
@@ -28,7 +29,7 @@ class CustomerRep{
 
     public function getById($id){
 
-        $sql = "SELECT * FROM customer WHERE id = ':id';";
+        $sql = "SELECT * FROM customer WHERE id = :id";
         return $this->conn->fetchObject($sql, [":id" => $id], $this->nestedClass);
 
     }

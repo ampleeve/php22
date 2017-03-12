@@ -6,15 +6,15 @@
  * Time: 18:05
  */
 namespace app\services;
- use app\models\Customer;
- use app\models\CustomerRep;
- use app\models\SessionsRep;
+use app\models\Customer;
+use app\models\CustomerRep;
+use app\models\SessionsRep;
 
- class Auth{
+class Auth{
 
-     protected $sessionKey = 'sid';
+    protected $sessionKey = 'sid';
 
-     public function login($login, $password){
+    public function login($login, $password){
 
         $user = (new CustomerRep())->getByLoginPass($login, $password);
         if(!$user){
@@ -22,28 +22,36 @@ namespace app\services;
         }
 
         return $this->openSession($user);
-     }
+    }
 
-     protected function openSession(Customer $user){
-
+    protected function openSession(Customer $user){
         $model = new SessionsRep();
         $sid = $this->generateStr();
         $model->createNew($user->getId(),$sid, date('Y-m-d H:i:s'));
         $_SESSION[$this->sessionKey] = $sid;
         return true;
 
-     }
+    }
 
-     private function generateStr($length = 10){
+    public function getSessionId(){
+        $sid = $_SESSION[$this->sessionKey];
+        if(!is_null($sid)){
+            (new SessionsRep())->updateLastTime($sid);
 
-         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789";
-         $code = "";
-         $clen = strlen($chars) - 1;
+        }
+        return $sid;
+    }
 
-         while (strlen($code) < $length)
-             $code .= $chars[mt_rand(0, $clen)];
+    private function generateStr($length = 10){
 
-         return $code;
-     }
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789";
+        $code = "";
+        $clen = strlen($chars) - 1;
 
- }
+        while (strlen($code) < $length)
+            $code .= $chars[mt_rand(0, $clen)];
+
+        return $code;
+    }
+
+}

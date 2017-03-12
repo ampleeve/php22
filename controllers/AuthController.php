@@ -12,7 +12,7 @@ class AuthController extends Controller {
 
             if((new Auth())->login($_POST['login'], $_POST['pass'])){
 
-                $this->redirect("product/");
+                $this->redirect("/");
             }
 
         }
