@@ -15,8 +15,6 @@ class ProductController extends Controller{
 
     public function actionProduct($params){
 
-        //echo "<pre>";
-        //var_dump($params);die();
         $id = $params[0];
         $this->render('product/Product', ['model' => Product::getAllProductById($id)]);
     }

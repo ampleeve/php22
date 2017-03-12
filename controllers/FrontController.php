@@ -27,7 +27,6 @@ use app\services\RequestManager;
 
             session_start();
             $user = (new Customer())->getCurrent();
-            echo "<pre>";
             if(!$user){
                 $this->redirect('auth');
             }

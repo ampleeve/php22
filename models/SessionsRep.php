@@ -14,8 +14,7 @@ class SessionsRep{
     private $conn = null;
 
     public function __construct(){
-        echo "<pre>";var_dump(Application::call()->db->getConnection());die();
-        $this->conn = Db::getInstance();
+        $this->conn = Application::call()->db;
         //return $this->conn;
     }
 
@@ -31,7 +30,7 @@ class SessionsRep{
 
     public function createNew($userId, $sid, $timeLast){
         $sql = "INSERT INTO `sessions` (`userID`, `lastUpdate`, `sid`) VALUES ( :userId, :timeLast, :sid)";
-        Db::getInstance()->myExecute($sql,[":userId" => $userId, ":timeLast" => $timeLast, ":sid" => $sid]);
+        Application::call()->db->myExecute($sql,[":userId" => $userId, ":timeLast" => $timeLast, ":sid" => $sid]);
         $_SESSION['sid'] = $sid;
     }
 
@@ -39,7 +38,6 @@ class SessionsRep{
 
         if (is_null($time)) {
             $time = date('Y-m-d H:i:s');
-            echo "<pre>";var_dump($time);die();
         }
         return Db::getInstance()->myExecute(
             "UPDATE sessions SET lastUpdate = '{$time}' WHERE sid = '{$sid}'");

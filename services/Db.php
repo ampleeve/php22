@@ -8,7 +8,7 @@ use \PDO;
     protected $config = [
         'driver' => 'mysql',
         'host' => 'localhost',
-        'customer' => 'root',
+        'user' => 'root',
         'password' => '',
         'database' => 'shop'
     ];
@@ -17,10 +17,10 @@ use \PDO;
       * Db constructor.
       * @param array $config
       */
-     public function __construct($driver, $host, $login, $password, $database){
+     public function __construct($driver, $host, $user, $password, $database){
          $this->config['driver'] = $driver;
          $this->config['host'] = $host;
-         $this->config['login'] = $login;
+         $this->config['user'] = $user;
          $this->config['password'] = $password;
          $this->config['database'] = $database;
      }
@@ -28,15 +28,17 @@ use \PDO;
 
     public function getConnection()
     {
+
         if (is_null($this->conn)) {
             $this->conn = new PDO(
                 $this->prepareDnsString(),
-                $this->dbConfig['user'],
-                $this->dbConfig['password']
+                $this->config['user'],
+                $this->config['password']
             );
 
             $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
         }
         return $this->conn;
     }
@@ -47,13 +49,13 @@ use \PDO;
      * @return PDOStatement
      */
     public function query($sql, $params = []){
-
         $smtp = $this->getConnection()->prepare($sql);
         $smtp->execute($params);
+        return $smtp;
     }
 
-    public function fetchAll($sql, $params = [])
-    {
+    public function myFetchAll($sql, $params = []){
+
         $smtp = $this->query($sql, $params);
         return $smtp->fetchAll();
     }
@@ -76,7 +78,7 @@ use \PDO;
      * @param $params
      * @return int - количество обработанных запросом строк
      */
-    public function execute($sql, $params = [])
+    public function myExecute($sql, $params = [])
     {
         $this->query($sql, $params);
         return true;
@@ -86,9 +88,9 @@ use \PDO;
     {
         return sprintf(
             "%s:host=%s;dbname=%s;charset=UTF8",
-            $this->dbConfig['driver'],
-            $this->dbConfig['host'],
-            $this->dbConfig['database']
+            $this->config['driver'],
+            $this->config['host'],
+            $this->config['database']
         );
     }
  }
