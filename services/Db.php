@@ -3,10 +3,9 @@ namespace app\services;
 use app\traits\TSingltone;
 use \PDO;
  class Db{
-    use TSingltone;
 
     protected $conn;
-    protected $dbConfig = [
+    protected $config = [
         'driver' => 'mysql',
         'host' => 'localhost',
         'customer' => 'root',
@@ -14,13 +13,25 @@ use \PDO;
         'database' => 'shop'
     ];
 
+     /**
+      * Db constructor.
+      * @param array $config
+      */
+     public function __construct($driver, $host, $login, $password, $database){
+         $this->config['driver'] = $driver;
+         $this->config['host'] = $host;
+         $this->config['login'] = $login;
+         $this->config['password'] = $password;
+         $this->config['database'] = $database;
+     }
+
 
     public function getConnection()
     {
         if (is_null($this->conn)) {
             $this->conn = new PDO(
                 $this->prepareDnsString(),
-                $this->dbConfig['customer'],
+                $this->dbConfig['user'],
                 $this->dbConfig['password']
             );
 
