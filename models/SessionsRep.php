@@ -20,8 +20,7 @@ use app\services\Db;
     /*
     * Очистка неиспользуемых сессий
     */
-    public function clearSessions()
-    {
+    public function clearSessions(){
         return Db::getInstance()->execute(
             sprintf("DELETE FROM sessions WHERE lastUpdate < %s", date('Y-m-d H:i:s', time() - 60 * 20))
         );
@@ -33,7 +32,6 @@ use app\services\Db;
         $_SESSION['sid'] = $sid;
     }
 
-
     public function updateLastTime($sid, $time = null){
 
         if (is_null($time)) {
@@ -43,10 +41,17 @@ use app\services\Db;
             "UPDATE sessions SET lastUpdate = '{$time}' WHERE sid = '{$sid}'");
     }
 
-    public function getUidBySid($sid)
-    {
+    public function getUidBySid($sid){
+
         return Application::call()->db->fetchOne(
             "SELECT userId FROM sessions WHERE sid = ?", [$sid]
         )['userId'];
+    }
+
+    public function clearSessionBySid($sid){
+
+        $sql = "DELETE FROM sessions WHERE sid = :sid";
+        return Application::call()->db->myExecute($sql, [':sid' => $sid];
+
     }
  }
