@@ -51,7 +51,8 @@ use app\services\Db;
     public function clearSessionBySid($sid){
 
         $sql = "DELETE FROM sessions WHERE sid = :sid";
-        return Application::call()->db->myExecute($sql, [':sid' => $sid];
+        return Application::call()->db->myExecute($sql, [':sid' => $sid]);
 
     }
+
  }

@@ -12,14 +12,12 @@ class AuthController extends Controller {
 
         if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login']) && isset($_POST['pass'])){
 
-            if((new Auth())->login($_POST['login'], $_POST['pass'])){
+            if(Application::call()->auth->login($_POST['login'], $_POST['pass'])){
 
                 $this->redirect("/");
             }
 
         }
-
-        //echo "<pre>"; var_dump(Application::call()->user->getCurrent());die();
 
         if(Application::call()->user->getCurrent()){
 
@@ -28,5 +26,13 @@ class AuthController extends Controller {
         }
 
         $this->render('auth/login');
+    }
+
+    public function actionLogout(){
+
+        $currentSid = Application::call()->auth->getSessionId();
+        Application::call()->session_rep->clearSessionBySid($currentSid);
+        $this->redirect('/');
+
     }
 }

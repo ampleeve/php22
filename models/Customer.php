@@ -18,8 +18,8 @@ namespace app\models;
     }
 
     /**@return static*/
-     public function getCurrent()
-     {
+     public function getCurrent(){
+
          $userId = $this->getUserId();
          if($userId){
              return Application::call()->user_rep->getById($userId);
@@ -27,8 +27,14 @@ namespace app\models;
          return null;
      }
 
-     protected function getUserId()
-     {
+     public function getName(){
+
+         return $this->getCurrent()->username;
+
+     }
+
+     protected function getUserId(){
+
          $sid = Application::call()->auth->getSessionId();
          if(!is_null($sid)){
              return Application::call()->session_rep->getUidBySid($sid);

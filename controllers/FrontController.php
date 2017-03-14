@@ -19,7 +19,6 @@ use app\services\RequestManager;
         $this->controllerName = sprintf("app\controllers\%sController", ucfirst($this->controllerName));
         /** @var  Controller $controller */
         $controller = new $this->controllerName(Application::call()->renderer);
-        //$controller = new $this->controllerName(new \app\services\TemplateRenderer());
         $controller->run($this->actionName, $this->params);
     }
 

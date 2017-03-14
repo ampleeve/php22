@@ -41,10 +41,12 @@ use app\models\Customer;
             echo $this->renderTemplate('layouts/'. $this->layout, [
 
                 'content' => $this->renderTemplate($template, $params),
-                'username' => Application::call()->user->getCurrent()->username
+                'username' => Application::call()->user->getName()
 
             ]);
+
         }else{
+
             echo $this->renderTemplate($template, $params);
         }
 
