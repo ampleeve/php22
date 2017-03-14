@@ -3,7 +3,7 @@ namespace app\models;
 use app\base\Application;
 use app\services\Db;
 
-class CustomerRep{
+ class CustomerRep{
 
     /** @var Db */
     private $conn = null;
@@ -16,9 +16,6 @@ class CustomerRep{
     }
 
     public function getByLoginPass($login, $pass){
-
-        //echo "<pre>";
-        //var_dump($this->conn->fetchObject());die();
 
         return $this->conn->fetchObject(
             sprintf("SELECT * FROM customer WHERE username = '%s' AND password = '%s'", $login, md5($pass)
@@ -34,4 +31,4 @@ class CustomerRep{
 
     }
 
-}
+ }

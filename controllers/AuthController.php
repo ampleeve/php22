@@ -1,5 +1,7 @@
 <?php
 namespace app\controllers;
+use app\base\Application;
+use app\models\Customer;
 use app\services\Auth;
 
 class AuthController extends Controller {
@@ -16,6 +18,15 @@ class AuthController extends Controller {
             }
 
         }
+
+        //echo "<pre>"; var_dump(Application::call()->user->getCurrent());die();
+
+        if(Application::call()->user->getCurrent()){
+
+            $this->redirect("/");
+
+        }
+
         $this->render('auth/login');
     }
 }

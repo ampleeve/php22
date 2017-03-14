@@ -8,14 +8,13 @@
 namespace app\models;
 use app\base\Application;
 use app\services\Db;
-class SessionsRep{
+ class SessionsRep{
 
     /** @var Db */
     private $conn = null;
 
     public function __construct(){
         $this->conn = Application::call()->db;
-        //return $this->conn;
     }
 
     /*
@@ -34,19 +33,20 @@ class SessionsRep{
         $_SESSION['sid'] = $sid;
     }
 
+
     public function updateLastTime($sid, $time = null){
 
         if (is_null($time)) {
             $time = date('Y-m-d H:i:s');
         }
-        return Db::getInstance()->myExecute(
+        return Application::call()->db->myExecute(
             "UPDATE sessions SET lastUpdate = '{$time}' WHERE sid = '{$sid}'");
     }
 
     public function getUidBySid($sid)
     {
-        return Db::getInstance()->fetchOne(
+        return Application::call()->db->fetchOne(
             "SELECT userId FROM sessions WHERE sid = ?", [$sid]
         )['userId'];
     }
-}
+ }

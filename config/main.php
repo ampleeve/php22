@@ -1,6 +1,6 @@
 <?php
 
-return [
+ return [
 
     'template_root' => $_SERVER['DOCUMENT_ROOT'] . "/../views/",
     'layout' => 'main',
@@ -10,6 +10,12 @@ return [
         'user' => [
 
             'class' => "app\\models\\Customer"
+
+        ],
+
+        'user_rep' => [
+
+            'class' => "app\\models\\CustomerRep"
 
         ],
 
@@ -54,9 +60,16 @@ return [
 
         ],
 
-        'renderer' => "app\\services\\TemplateRenderer",
+        'session_rep' => [
 
+            'class' => "app\\models\\SessionsRep"
+
+        ],
+
+        'renderer' => [
+
+            'class' => "app\\services\\TemplateRenderer"
+
+        ],
     ]
-
-
-];
+ ];

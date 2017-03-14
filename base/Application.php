@@ -32,7 +32,7 @@ class Application{
 
     public function run(){
 
-        error_reporting( E_ERROR );
+        //error_reporting( E_ERROR );
         $this->config = include_once "../config/main.php";
         $this->autoload();
         $this->storage = new Container();
@@ -51,6 +51,7 @@ class Application{
     public function createComponent($name){
 
         if(isset($this->config['components'][$name])){
+
             $params = $this->config['components'][$name];
             $class = $params['class'];
             unset ($params['class']);
