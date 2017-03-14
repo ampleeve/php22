@@ -51,6 +51,7 @@ class Application{
     public function createComponent($name){
 
         if(isset($this->config['components'][$name])){
+
             $params = $this->config['components'][$name];
             $class = $params['class'];
             unset ($params['class']);

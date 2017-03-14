@@ -62,7 +62,7 @@ use \PDO;
 
     public function fetchOne($sql, $params = []){
 
-        return $this->fetchAll($sql, $params)[0];
+        return $this->myFetchAll($sql, $params)[0];
     }
 
     public function fetchObject($sql, $params = [], $class)

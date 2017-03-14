@@ -1,5 +1,7 @@
 <?php
 namespace app\controllers;
+use app\base\Application;
+use app\models\Customer;
 use app\services\Auth;
 
 class AuthController extends Controller {
@@ -10,12 +12,27 @@ class AuthController extends Controller {
 
         if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login']) && isset($_POST['pass'])){
 
-            if((new Auth())->login($_POST['login'], $_POST['pass'])){
+            if(Application::call()->auth->login($_POST['login'], $_POST['pass'])){
 
                 $this->redirect("/");
             }
 
         }
+
+        if(Application::call()->user->getCurrent()){
+
+            $this->redirect("/");
+
+        }
+
         $this->render('auth/login');
+    }
+
+    public function actionLogout(){
+
+        $currentSid = Application::call()->auth->getSessionId();
+        Application::call()->session_rep->clearSessionBySid($currentSid);
+        $this->redirect('/');
+
     }
 }

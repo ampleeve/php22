@@ -8,21 +8,19 @@
 namespace app\models;
 use app\base\Application;
 use app\services\Db;
-class SessionsRep{
+ class SessionsRep{
 
     /** @var Db */
     private $conn = null;
 
     public function __construct(){
         $this->conn = Application::call()->db;
-        //return $this->conn;
     }
 
     /*
     * Очистка неиспользуемых сессий
     */
-    public function clearSessions()
-    {
+    public function clearSessions(){
         return Db::getInstance()->execute(
             sprintf("DELETE FROM sessions WHERE lastUpdate < %s", date('Y-m-d H:i:s', time() - 60 * 20))
         );
@@ -39,14 +37,22 @@ class SessionsRep{
         if (is_null($time)) {
             $time = date('Y-m-d H:i:s');
         }
-        return Db::getInstance()->myExecute(
+        return Application::call()->db->myExecute(
             "UPDATE sessions SET lastUpdate = '{$time}' WHERE sid = '{$sid}'");
     }
 
-    public function getUidBySid($sid)
-    {
-        return Db::getInstance()->fetchOne(
+    public function getUidBySid($sid){
+
+        return Application::call()->db->fetchOne(
             "SELECT userId FROM sessions WHERE sid = ?", [$sid]
         )['userId'];
     }
-}
+
+    public function clearSessionBySid($sid){
+
+        $sql = "DELETE FROM sessions WHERE sid = :sid";
+        return Application::call()->db->myExecute($sql, [':sid' => $sid]);
+
+    }
+
+ }

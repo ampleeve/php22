@@ -1,0 +1,84 @@
+/*
+ * Rates & docs for calc
+ */
+
+export const rates = {
+'client_company_employee': [
+{
+'credit-limit-min': 50000,
+'credit-limit-max': 250000,
+'min-date-year': 1,
+'max-date-year': 5,
+'min-prcnt-rate': 17.99,
+'max-prcnt-rate': 24.99
+},
+{
+'credit-limit-min': 250001,
+'credit-limit-max': 700000,
+'min-date-year': 1,
+'max-date-year': 5,
+'min-prcnt-rate': 16.99,
+'max-prcnt-rate': 22.99
+},
+{
+'credit-limit-min': 700001,
+'credit-limit-max': 1500000,
+'min-date-year': 1,
+'max-date-year': 5,
+'min-prcnt-rate': 15.99,
+'max-prcnt-rate': 21.99
+}
+],
+'card_owner': [
+{
+'credit-limit-min': 50000,
+'credit-limit-max': 250000,
+'min-date-year': 1,
+'max-date-year': 5,
+'min-prcnt-rate': 15.99,
+'max-prcnt-rate': 27.99
+},
+{
+'credit-limit-min': 250001,
+'credit-limit-max': 700000,
+'min-date-year': 1,
+'max-date-year': 5,
+'min-prcnt-rate': 14.99,
+'max-prcnt-rate': 22.99
+},
+{
+'credit-limit-min': 700001,
+'credit-limit-max': 2000000,
+'min-date-year': 1,
+'max-date-year': 5,
+'min-prcnt-rate': 11.99,
+'max-prcnt-rate': 21.99
+}
+],
+'new': [
+{
+'credit-limit-min': 50000,
+'credit-limit-max': 250000,
+'min-date-year': 1,
+'max-date-year': 3,
+'min-prcnt-rate': 21.99,
+'max-prcnt-rate': 27.99
+},
+{
+'credit-limit-min': 250001,
+'credit-limit-max': 700000,
+'min-date-year': 1,
+'max-date-year': 3,
+'min-prcnt-rate': 18.99,
+'max-prcnt-rate': 24.99
+},
+{
+'credit-limit-min': 700001,
+'credit-limit-max': 1000000,
+'min-date-year': 1,
+'max-date-year': 3,
+'min-prcnt-rate': 16.99,
+'max-prcnt-rate': 22.99
+}
+]
+};

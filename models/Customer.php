@@ -1,9 +1,12 @@
 <?php
 namespace app\models;
+ use app\base\Application;
+ use app\services\Auth;
+
  class Customer{
 
     protected $id;
-    protected $username;
+    public $username;
     protected $phone;
     protected $password;
     protected $sessionId;
@@ -15,10 +18,28 @@ namespace app\models;
     }
 
     /**@return static*/
-    public function getCurrent(){
+     public function getCurrent(){
 
-        return true;
+         $userId = $this->getUserId();
+         if($userId){
+             return Application::call()->user_rep->getById($userId);
+         }
+         return null;
+     }
 
-    }
+     public function getName(){
+
+         return $this->getCurrent()->username;
+
+     }
+
+     protected function getUserId(){
+
+         $sid = Application::call()->auth->getSessionId();
+         if(!is_null($sid)){
+             return Application::call()->session_rep->getUidBySid($sid);
+         }
+         return null;
+     }
 
  }
