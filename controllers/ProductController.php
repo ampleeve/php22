@@ -7,6 +7,7 @@
  */
 
 namespace app\controllers;
+use app\base\Application;
 use app\models\Product;
 
 class ProductController extends Controller{
@@ -16,7 +17,7 @@ class ProductController extends Controller{
     public function actionProduct($params){
 
         $id = $params[0];
-        $this->render('product/Product', ['model' => Product::getAllProductById($id)]);
+        $this->render('product/Product', ['model' => Application::call()->product->getAllProductById($id)]);
     }
 
     public function actionProducts(){

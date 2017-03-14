@@ -32,8 +32,7 @@ class RequestManager{
     }
 
     public function getControllerName(){
-        //echo "<pre>";
-        //var_dump($this->controllerName);die();
+
         return $this->controllerName;
     }
 
