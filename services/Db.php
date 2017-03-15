@@ -1,5 +1,6 @@
 <?php
 namespace app\services;
+use app\base\Application;
 use app\traits\TSingltone;
 use \PDO;
  class Db{

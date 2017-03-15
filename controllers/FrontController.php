@@ -29,6 +29,7 @@ use app\services\RequestManager;
         if($this->controllerName != 'auth'){
             /** @var  Customer $user */
             $user = Application::call()->user->getCurrent();
+
             if(!$user){
                 $this->redirect('auth');
             }

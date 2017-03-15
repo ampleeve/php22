@@ -32,6 +32,17 @@ use app\services\Auth;
 
         $currentSid = Application::call()->auth->getSessionId();
         Application::call()->session_rep->clearSessionBySid($currentSid);
+
+        if (isset($_COOKIE['uid'])) {
+            unset($_COOKIE['uid']);
+            setcookie('uid', '', time() - 3600, '/');
+        }
+
+        if (isset($_COOKIE['sid'])) {
+            unset($_COOKIE['sid']);
+            setcookie('sid', '', time() - 3600, '/');
+        }
+        
         $this->redirect('/');
 
     }

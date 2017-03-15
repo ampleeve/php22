@@ -36,7 +36,9 @@ namespace app\models;
      public function getUserId(){
 
          $sid = Application::call()->auth->getSessionId();
+
          if(!is_null($sid)){
+
              return Application::call()->session_rep->getUidBySid($sid);
          }
 
