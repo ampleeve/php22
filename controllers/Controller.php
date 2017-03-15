@@ -24,12 +24,12 @@ use app\models\Customer;
 
     }
 
-    public function run($action = null){
+    public function run($action = null, $params = null){
 
         $this->action = $action?:$this->defaultAction;
         $action = 'action' . ucfirst($this->action);
         $this->beforeAction();
-        $this->$action();
+        $this->$action($params);
         $this->afterAction();
 
     }

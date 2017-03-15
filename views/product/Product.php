@@ -1,5 +1,9 @@
 <?php /** @var \app\models\Product $model*/ ?>
 <body>
+<?php
+//echo "<pre>";var_dump($model);die();
+
+?>
 <p>
     <strong>Название товара:</strong> <?= $model->name ?> <br/>
     <strong>Бренд:</strong> <?= $model->brand ?> <br/>

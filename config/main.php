@@ -13,6 +13,12 @@
 
         ],
 
+        'product' => [
+
+            'class' => "app\\models\\Product"
+
+        ],
+
         'user_rep' => [
 
             'class' => "app\\models\\CustomerRep"

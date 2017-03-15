@@ -15,32 +15,29 @@ use app\base\Application;
 
      protected $sessionKey = 'sid';
 
-     public function login($login, $password){
+     public function login($login, $password, $isRemember){
 
-        $user = (new CustomerRep())->getByLoginPass($login, $password);
+        $user = Application::call()->user_rep->getByLoginPass($login, $password);
         if(!$user){
             return false;
         }
 
-        return $this->openSession($user);
+        return $this->openSession($user, $isRemember);
      }
 
-     public function logout($login){
-
-
-         //$user = (new CustomerRep())->getByLoginPass($login, $password);
-         //if(!$user){
-           //  return false;
-         //}
-
-         //return $this->openSession($user);
-     }
-
-     protected function openSession(Customer $user){
+     protected function openSession(Customer $user, $isRemember){
         $model = new SessionsRep();
         $sid = $this->generateStr();
         $model->createNew($user->getId(),$sid, date('Y-m-d H:i:s'));
         $_SESSION[$this->sessionKey] = $sid;
+
+        if($isRemember){
+
+            setcookie("uid", md5(md5(Application::call()->user->getUserId())), time() + 3600 * 24 * 366);
+            setcookie("sid", $this->getSessionId(), time() + 3600 * 24 * 366);
+
+        }
+
         return true;
 
      }

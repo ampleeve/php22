@@ -1,5 +1,6 @@
 <?php
 namespace app\models;
+use app\base\Application;
 use app\services\Db;
 class Product extends Model{
 
@@ -19,7 +20,7 @@ class Product extends Model{
         return 'product';
     }
 
-    public static function getAllProductById($id){
+    public function getAllProductById($id){
 
         $table = static::getTableName();
         $sql =
@@ -37,6 +38,6 @@ class Product extends Model{
                 INNER JOIN brand ON brand.id = {$table}.brandID
                 INNER JOIN type ON `type`.id = {$table}.typeID
                 WHERE product.id = :id;";
-        return Db::getInstance()->fetchObject($sql, [":id" => $id], get_called_class());
+        return Application::call()->db->fetchObject($sql, [":id" => $id], get_called_class());
     }
 }
