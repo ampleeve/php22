@@ -33,11 +33,23 @@ namespace app\models;
 
      }
 
-     protected function getUserId(){
+     public function getUserId(){
 
          $sid = Application::call()->auth->getSessionId();
          if(!is_null($sid)){
              return Application::call()->session_rep->getUidBySid($sid);
+         }
+
+         if(isset($_COOKIE['sid']) && isset($_COOKIE['uid'])){
+
+             $uid = Application::call()->session_rep->getUidBySid($_COOKIE['sid']);
+
+             if(md5(md5($uid)) == $_COOKIE['uid']){
+
+                 return $uid;
+
+             }
+
          }
          return null;
      }

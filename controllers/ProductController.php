@@ -10,9 +10,7 @@ namespace app\controllers;
 use app\base\Application;
 use app\models\Product;
 
-class ProductController extends Controller{
-
-   // protected $useLayout = true;
+ class ProductController extends Controller{
 
     public function actionProduct($params){
 
@@ -28,4 +26,4 @@ class ProductController extends Controller{
         $this->actionProducts();
     }
 
-}
+ }
